@@ -4,8 +4,13 @@ import { View, TextInput, Text, StyleSheet, Pressable } from "react-native";
 export default function RegistrationScreen() {
   const [formData, setFormData] = useState(null);
 
-  const handleInputText = (text) => {
-    console.log(text);
+  const handleInputText = (text, key) => {
+    setFormData((prev) => {
+      return {
+        ...prev,
+        [key]: text,
+      };
+    });
   };
   const handleSubmit = () => {};
   return (
@@ -14,19 +19,19 @@ export default function RegistrationScreen() {
         <TextInput
           style={styles.input}
           placeholder="Name"
-          onChangeText={(text) => handleInputText(text)}
+          onChangeText={(text) => handleInputText(text, "username")}
         />
         <TextInput
           style={styles.input}
           placeholder="Email"
           autoCapitalize="none"
-          onChangeText={(text) => handleInputText(text)}
+          onChangeText={(text) => handleInputText(text, "email")}
         />
         <TextInput
           style={styles.input}
           placeholder="Password"
           autoCapitalize="none"
-          onChangeText={(text) => handleInputText(text)}
+          onChangeText={(text) => handleInputText(text, "password")}
         />
         <Pressable style={styles.button} onPress={(e) => console.log(e)}>
           <Text style={styles.buttonText}>Sign Up!</Text>
