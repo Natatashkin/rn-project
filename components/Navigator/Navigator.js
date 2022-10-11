@@ -14,11 +14,16 @@ export default function Navigator() {
     <NavigationContainer>
       <MainStack.Navigator>
         {isLoggedIn ? (
-          <MainStack.Screen name="Home" component={HomeTabs} />
+          <MainStack.Screen
+            name="Home"
+            component={HomeTabs}
+            options={{ headerShown: false }}
+          />
         ) : (
           <MainStack.Screen
             name="Registration"
             component={RegistrationScreen}
+            options={{ headerShown: false }}
           />
         )}
       </MainStack.Navigator>
