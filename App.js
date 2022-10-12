@@ -18,9 +18,9 @@ export default function App() {
   //   }
   // }, [fontsLoaded]);
 
-  if (!fontsLoaded) {
-    return null;
-  }
+  // if (!fontsLoaded) {
+  //   return null;
+  // }
 
   return (
     <UserProvider>
