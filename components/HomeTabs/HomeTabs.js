@@ -3,40 +3,40 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { PostsScreen, CreatePostsScreen, ProfileScreen } from "../../screens";
 import { MaterialIcons } from "@expo/vector-icons";
 import { IconButton } from "../IconButton";
-import ThemeContext from "../../context/ThemeContext";
+import { theme } from "../../theme";
+import { StyleSheet } from "react-native";
 
 const Tab = createBottomTabNavigator();
 
+const HOME_TABS_OPTIONS = {
+  headerRightContainerStyle: {
+    backgroundColor: "red",
+    right: 10,
+  },
+  headerTitleContainerStyle: {
+    backgroundColor: "green",
+  },
+  headerLeftContainerStyle: {
+    backgroundColor: "blue",
+    left: 10,
+  },
+  headerTitleStyle: {
+    marginHorizontal: 10,
+  },
+  tabBarShowLabel: false,
+};
+
 export default function HomeTabs() {
   const {
-    theme: {
-      colors: { darkGrey, blue },
-    },
-  } = useContext(ThemeContext);
+    colors: { grey },
+  } = theme;
+
   const handleLogout = () => {
     console.log("logout");
   };
 
   return (
-    <Tab.Navigator
-      screenOptions={{
-        headerRightContainerStyle: {
-          backgroundColor: "red",
-          right: 10,
-        },
-        headerTitleContainerStyle: {
-          backgroundColor: "green",
-        },
-        headerLeftContainerStyle: {
-          backgroundColor: "blue",
-          left: 10,
-        },
-        headerTitleStyle: {
-          marginHorizontal: 10,
-        },
-        tabBarShowLabel: false,
-      }}
-    >
+    <Tab.Navigator screenOptions={HOME_TABS_OPTIONS}>
       <Tab.Screen
         name="Posts"
         component={PostsScreen}
@@ -47,7 +47,7 @@ export default function HomeTabs() {
               onPress={handleLogout}
               iconComponent={MaterialIcons}
               iconSize={24}
-              iconColor={darkGrey}
+              iconColor={grey}
               iconName={"logout"}
             />
           ),

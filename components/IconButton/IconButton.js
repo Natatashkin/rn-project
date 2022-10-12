@@ -18,6 +18,5 @@ export default function IconButton({
 const styles = StyleSheet.create({
   button: {
     paddingHorizontal: 4,
-    // marginRight: 10,
   },
 });
