@@ -49,6 +49,7 @@ const UserProvider = ({ children }) => {
   const refreshUser = async () => {
     try {
       const response = await SecureStore.getItemAsync("userData");
+      // console.log(response);
       setUserData(response);
       setIsLoggedIn(true);
       return response;
