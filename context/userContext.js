@@ -49,19 +49,20 @@ const UserProvider = ({ children }) => {
   const refreshUser = async () => {
     try {
       const response = await SecureStore.getItemAsync("userData");
-      // console.log(response);
+      if (!response) {
+        throw Error();
+      }
       setUserData(response);
       setIsLoggedIn(true);
       return response;
     } catch (error) {
-      console.log(error);
       setIsLoggedIn(false);
     }
   };
 
   useEffect(() => {
     refreshUser("userData");
-  });
+  }, [isLoggedIn]);
 
   return (
     <UserContext.Provider

@@ -18,10 +18,10 @@ export default function Navigator() {
   );
 
   useEffect(() => {
-    if (isReady) {
+    if (isReady || fontsLoaded) {
       onLayoutRootView();
     }
-  }, [isReady]);
+  }, [isReady, fontsLoaded]);
 
   return (
     <NavigationContainer>
@@ -30,11 +30,11 @@ export default function Navigator() {
           <MainStack.Screen name="Home" component={HomeTabs} />
         ) : (
           <>
-            <MainStack.Screen name="Login" component={LoginScreen} />
             <MainStack.Screen
               name="Registration"
               component={RegistrationScreen}
             />
+            <MainStack.Screen name="Login" component={LoginScreen} />
           </>
         )}
       </MainStack.Navigator>
