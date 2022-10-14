@@ -1,5 +1,11 @@
 const theme = {
-  fontSize: 16,
+  fonts: {
+    primaryFont: "Roboto-Regular",
+    secondaryFont: "Roboto-Medium",
+    fontSize: 16,
+  },
+  borderRadius: 8,
+  borderWidth: 1,
   colors: {
     blue: "#007aff",
     lightBlue: "#0a84ff",
@@ -11,6 +17,11 @@ const theme = {
     grey: "#BDBDBD",
     transparentBlack: "rgba(33, 33, 33, 0.8)",
     black: "#212121",
+  },
+
+  primaryText: {
+    fontSize: 16,
+    primaryFont: "Roboto-Regular",
   },
 };
 export default theme;

@@ -3,8 +3,9 @@ import { createStackNavigator } from "@react-navigation/stack";
 import React, { useContext, useEffect, useMemo } from "react";
 import { UserContext } from "../../context";
 import { useFontsLoadedState } from "../../hooks";
-import { HomeScreen, RegistrationScreen, LoginScreen } from "../../screens";
-import { HomeTabs } from "../HomeTabs";
+import RegistrationScreen from "../../screens/auth/RegistrationScreen/RegistrationScreen";
+import LoginScreen from "../../screens/auth/LoginScreen/LoginScreen";
+import HomeTabs from "../HomeTabs/HomeTabs";
 
 const MainStack = createStackNavigator();
 
@@ -22,6 +23,8 @@ export default function Navigator() {
       onLayoutRootView();
     }
   }, [isReady, fontsLoaded]);
+
+  // console.log("fontsLoaded", fontsLoaded);
 
   return (
     <NavigationContainer>
