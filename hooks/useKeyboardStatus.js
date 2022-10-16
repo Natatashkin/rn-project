@@ -6,7 +6,6 @@ export default function useKeyboardStatus() {
   const keyboardOpen = () => setIsKeyboardOpen(true);
   const keyboardHide = () => {
     setIsKeyboardOpen(false);
-    Keyboard.dismiss();
   };
 
   useEffect(() => {
@@ -18,5 +17,5 @@ export default function useKeyboardStatus() {
       hide.remove();
     };
   }, []);
-  return { isKeyboardOpen, keyboardHide };
+  return { isKeyboardOpen };
 }

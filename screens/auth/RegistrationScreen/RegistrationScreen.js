@@ -5,9 +5,11 @@ import {
   Text,
   StyleSheet,
   KeyboardAvoidingView,
+  Keyboard,
   Dimensions,
   TouchableWithoutFeedback,
   Platform,
+  TextInput,
 } from "react-native";
 
 import {
@@ -26,11 +28,12 @@ import {
 export default function RegistrationScreen({ navigation: { navigate } }) {
   const { theme } = useTheme();
   const style = styles(theme);
-  const { isKeyboardOpen, keyboardHide } = useKeyboardStatus();
+  const { isKeyboardOpen } = useKeyboardStatus();
   const [formData, setFormData] = useState(DEFAULT_REGISTRATION_FORM_VALUES);
   const isIOS = Platform.OS === "ios";
 
   const handleInputText = (text, key) => {
+    console.log(key);
     setFormData((prev) => {
       return {
         ...prev,
@@ -41,9 +44,10 @@ export default function RegistrationScreen({ navigation: { navigate } }) {
   const handleSubmit = (e) => {
     console.log("submit");
   };
+  console.log(formData);
   return (
     <ImageBackground>
-      <TouchableWithoutFeedback onPress={keyboardHide}>
+      <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         <View style={{ flex: 1, marginTop: isIOS ? 44 : 24 }}>
           <SafeAreaView style={style.container}>
             <KeyboardAvoidingView
