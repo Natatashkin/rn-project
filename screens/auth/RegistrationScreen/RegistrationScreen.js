@@ -1,19 +1,34 @@
 import React, { useEffect, useState } from "react";
-import { SafeAreaView, View, Text, StyleSheet } from "react-native";
+import {
+  SafeAreaView,
+  View,
+  Text,
+  StyleSheet,
+  KeyboardAvoidingView,
+  Dimensions,
+  TouchableWithoutFeedback,
+  Platform,
+} from "react-native";
+
 import {
   DEFAULT_REGISTRATION_FORM_VALUES,
   FORM_FIELDS_NAMES,
 } from "../../constants";
-import { useStatusBarHeigtAsync } from "../../../hooks";
 import { useTheme } from "../../../context";
-import { ImageBackground, InputText, Button } from "../../../components";
+import { useKeyboardStatus } from "../../../hooks";
+import {
+  ImageBackground,
+  InputText,
+  Button,
+  UserAvatar,
+} from "../../../components";
 
 export default function RegistrationScreen({ navigation: { navigate } }) {
-  const { statusBarHeight } = useStatusBarHeigtAsync();
   const { theme } = useTheme();
   const style = styles(theme);
-
+  const { isKeyboardOpen, keyboardHide } = useKeyboardStatus();
   const [formData, setFormData] = useState(DEFAULT_REGISTRATION_FORM_VALUES);
+  const isIOS = Platform.OS === "ios";
 
   const handleInputText = (text, key) => {
     setFormData((prev) => {
@@ -26,64 +41,68 @@ export default function RegistrationScreen({ navigation: { navigate } }) {
   const handleSubmit = (e) => {
     console.log("submit");
   };
-
   return (
     <ImageBackground>
-      <SafeAreaView style={style.container}>
-        <View
-          style={[
-            style.screenLayout,
-            statusBarHeight && { marginTop: statusBarHeight },
-          ]}
-        >
-          <View style={style.avatar}></View>
-          <View style={style.formContainer}>
-            <Text style={style.title}>Реєстрація</Text>
-            <View style={style.form}>
-              <View style={style.formFieldContainer}>
-                <InputText
-                  value={formData.name}
-                  placeholder="Name"
-                  onChangeText={(text) =>
-                    handleInputText(text, FORM_FIELDS_NAMES.name)
-                  }
-                />
-              </View>
-              <View style={style.formFieldContainer}>
-                <InputText
-                  value={formData.email}
-                  placeholder="Email"
-                  onChangeText={(text) =>
-                    handleInputText(text, FORM_FIELDS_NAMES.email)
-                  }
-                />
-              </View>
-              <View>
-                <InputText
-                  value={formData.password}
-                  placeholder="Password"
-                  onChangeText={(text) =>
-                    handleInputText(text, FORM_FIELDS_NAMES.password)
-                  }
-                />
-              </View>
-              <View style={style.buttonContainer}>
-                <Button onPress={handleSubmit} title="Sign Up!" />
-              </View>
-            </View>
+      <TouchableWithoutFeedback onPress={keyboardHide}>
+        <View style={{ flex: 1, marginTop: isIOS ? 44 : 24 }}>
+          <SafeAreaView style={style.container}>
+            <KeyboardAvoidingView
+              style={style.container}
+              behavior={isIOS ? "padding" : "height"}
+            >
+              <View style={[style.screenLayout]}>
+                <UserAvatar />
+                <View style={style.formContainer}>
+                  <Text style={style.title}>Реєстрація</Text>
+                  <View style={style.form}>
+                    <View style={style.formFieldContainer}>
+                      <InputText
+                        value={formData.name}
+                        placeholder="Name"
+                        onChangeText={(text) => handleInputText(text, "name")}
+                      />
+                    </View>
 
-            <Text style={style.hasAccountText}>
-              Вже маєте аккаунт?{" "}
-              <Text
-                onPress={() => navigate("Login")}
-                style={style.hasAccountTextLink}
-              >
-                Увійти
-              </Text>{" "}
-            </Text>
-          </View>
+                    <View style={style.formFieldContainer}>
+                      <InputText
+                        value={formData.email}
+                        placeholder="Email"
+                        onChangeText={(text) =>
+                          handleInputText(text, FORM_FIELDS_NAMES.email)
+                        }
+                        keyboardType="email-address"
+                      />
+                    </View>
+                    <View>
+                      <InputText
+                        value={formData.password}
+                        placeholder="Password"
+                        onChangeText={(text) =>
+                          handleInputText(text, FORM_FIELDS_NAMES.password)
+                        }
+                        secureTextEntry
+                      />
+                    </View>
+                    <View style={style.buttonContainer}>
+                      <Button onPress={handleSubmit} title="Sign Up!" />
+                    </View>
+                  </View>
+
+                  <Text style={style.hasAccountText}>
+                    Вже маєте аккаунт?{" "}
+                    <Text
+                      onPress={() => navigate("Login")}
+                      style={style.hasAccountTextLink}
+                    >
+                      Увійти
+                    </Text>{" "}
+                  </Text>
+                </View>
+              </View>
+            </KeyboardAvoidingView>
+          </SafeAreaView>
         </View>
-      </SafeAreaView>
+      </TouchableWithoutFeedback>
     </ImageBackground>
   );
 }
@@ -97,27 +116,18 @@ const styles = (theme) =>
     },
     screenLayout: {
       justifyContent: "flex-end",
+      marginTop: 48,
     },
 
     formContainer: {
-      height: "80%",
       paddingTop: 92,
       backgroundColor: "white",
       borderTopLeftRadius: 25,
       borderTopRightRadius: 25,
     },
-    avatar: {
-      width: 150,
-      height: 150,
-      alignSelf: "center",
-      backgroundColor: theme.colors.lightGrey,
-      borderRadius: 16,
-      marginBottom: -75,
-      zIndex: 2,
-    },
+
     title: {
       alignSelf: "center",
-      // fontFamily: "Roboto-Medium",
       marginBottom: 32,
       fontSize: 30,
       fontWeight: "500",

@@ -7,10 +7,12 @@ export default function InputText({
   placeholder,
   onChangeText,
   value,
+  secureTextEntry,
+  keyboardType = "default",
 }) {
   const { theme } = useContext(ThemeContext);
   const style = styles(theme);
-
+  value;
   return (
     <TextInput
       placeholder={placeholder}
@@ -19,6 +21,8 @@ export default function InputText({
       value={value}
       onChangeText={onChangeText}
       autoCapitalize={autoCapitalize}
+      secureTextEntry={secureTextEntry}
+      keyboardType={keyboardType}
     />
   );
 }
