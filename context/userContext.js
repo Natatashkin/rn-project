@@ -1,13 +1,8 @@
-import React, {
-  createContext,
-  useContext,
-  useState,
-  useEffect,
-  useCallback,
-} from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 import * as SecureStore from "expo-secure-store";
 
 export const UserContext = createContext(null);
+export const useUser = () => useContext(UserContext);
 
 const UserProvider = ({ children }) => {
   const [userData, setUserData] = useState(null);

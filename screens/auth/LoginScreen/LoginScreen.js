@@ -117,7 +117,6 @@ const styles = (theme) =>
       alignSelf: "center",
       marginBottom: 32,
       fontSize: 30,
-      // fontFamily: "Roboto-Medium",
       fontWeight: "500",
     },
     form: {

@@ -1,7 +1,7 @@
-import React, { useContext, useEffect, useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { UserContext } from "../../context";
+import { useUser } from "../../context";
 import { useFontsLoadedState } from "../../hooks";
 import RegistrationScreen from "../../screens/auth/RegistrationScreen/RegistrationScreen";
 import LoginScreen from "../../screens/auth/LoginScreen/LoginScreen";
@@ -10,7 +10,7 @@ import HomeTabs from "../../screens/home/HomeTabs/HomeTabs";
 const MainStack = createStackNavigator();
 
 export default function Navigator() {
-  const { isLoggedIn } = useContext(UserContext);
+  const { isLoggedIn } = useUser();
   const { fontsLoaded, onLayoutRootView } = useFontsLoadedState();
 
   const isReady = useMemo(

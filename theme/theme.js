@@ -1,7 +1,6 @@
 const theme = {
   fonts: {
     primaryFont: "Roboto-Regular",
-    secondaryFont: "Roboto-Medium",
     fontSize: 16,
   },
   borderRadius: 8,

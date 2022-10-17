@@ -1,7 +1,7 @@
-import React, { useContext, useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { TextInput, StyleSheet, View } from "react-native";
 import { Feather } from "@expo/vector-icons";
-import { ThemeContext } from "../../context";
+import { useTheme } from "../../context";
 import { IconButton } from "../IconButton";
 
 export default function InputText({
@@ -9,10 +9,10 @@ export default function InputText({
   placeholder,
   onChangeText,
   value,
-  secureTextEntry,
+  secureTextEntry = false,
   keyboardType = "default",
 }) {
-  const { theme } = useContext(ThemeContext);
+  const { theme } = useTheme();
   const style = styles(theme);
   const currentInputRef = useRef(null);
   const [focus, setFocus] = useState(false);
