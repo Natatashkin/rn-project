@@ -1,22 +1,18 @@
 import { Pressable, StyleSheet } from "react-native";
 
-export default function IconButton({
-  onPress,
-  iconComponent,
-  iconSize,
-  iconColor,
-  iconName,
-}) {
-  const Icon = iconComponent;
+export default function IconButton({ onPress, children }) {
   return (
     <Pressable onPress={onPress} style={styles.button}>
-      <Icon name={iconName} size={iconSize} color={iconColor} />
+      {children}
     </Pressable>
   );
 }
 
 const styles = StyleSheet.create({
   button: {
-    paddingHorizontal: 4,
+    alignItems: "center",
+    justifyContent: "center",
+    height: "100%",
+    width: "100%",
   },
 });

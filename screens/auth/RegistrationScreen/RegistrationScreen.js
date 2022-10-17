@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
   SafeAreaView,
   View,
@@ -9,7 +9,7 @@ import {
   Dimensions,
   TouchableWithoutFeedback,
   Platform,
-  TextInput,
+  ScrollView,
 } from "react-native";
 
 import {
@@ -31,9 +31,12 @@ export default function RegistrationScreen({ navigation: { navigate } }) {
   const { isKeyboardOpen } = useKeyboardStatus();
   const [formData, setFormData] = useState(DEFAULT_REGISTRATION_FORM_VALUES);
   const isIOS = Platform.OS === "ios";
+  const formPosition = useMemo(
+    () => (isKeyboardOpen ? "flex-start" : "flex-end"),
+    [isKeyboardOpen]
+  );
 
   const handleInputText = (text, key) => {
-    console.log(key);
     setFormData((prev) => {
       return {
         ...prev,
@@ -44,26 +47,29 @@ export default function RegistrationScreen({ navigation: { navigate } }) {
   const handleSubmit = (e) => {
     console.log("submit");
   };
-  console.log(formData);
+
+  // useEffect(() => {}, [isKeyboardOpen]);
+
   return (
     <ImageBackground>
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-        <View style={{ flex: 1, marginTop: isIOS ? 44 : 24 }}>
-          <SafeAreaView style={style.container}>
-            <KeyboardAvoidingView
-              style={style.container}
-              behavior={isIOS ? "padding" : "height"}
-            >
-              <View style={[style.screenLayout]}>
+        <View style={[style.container, { marginTop: isIOS ? 100 : 24 }]}>
+          <KeyboardAvoidingView style={style.container} behavior="padding">
+            <SafeAreaView style={{ flex: 1 }}>
+              <View
+                style={[style.screenLayout, { justifyContent: formPosition }]}
+              >
                 <UserAvatar />
-                <View style={style.formContainer}>
+                <View style={style.formLayout}>
                   <Text style={style.title}>Реєстрація</Text>
-                  <View style={style.form}>
+                  <ScrollView contentContainerStyle={style.form}>
                     <View style={style.formFieldContainer}>
                       <InputText
                         value={formData.name}
                         placeholder="Name"
-                        onChangeText={(text) => handleInputText(text, "name")}
+                        onChangeText={(text) =>
+                          handleInputText(text, FORM_FIELDS_NAMES.name)
+                        }
                       />
                     </View>
 
@@ -90,7 +96,7 @@ export default function RegistrationScreen({ navigation: { navigate } }) {
                     <View style={style.buttonContainer}>
                       <Button onPress={handleSubmit} title="Sign Up!" />
                     </View>
-                  </View>
+                  </ScrollView>
 
                   <Text style={style.hasAccountText}>
                     Вже маєте аккаунт?{" "}
@@ -103,8 +109,8 @@ export default function RegistrationScreen({ navigation: { navigate } }) {
                   </Text>
                 </View>
               </View>
-            </KeyboardAvoidingView>
-          </SafeAreaView>
+            </SafeAreaView>
+          </KeyboardAvoidingView>
         </View>
       </TouchableWithoutFeedback>
     </ImageBackground>
@@ -119,15 +125,16 @@ const styles = (theme) =>
       backgroundColor: "transparent",
     },
     screenLayout: {
-      justifyContent: "flex-end",
-      marginTop: 48,
+      flex: 1,
+      // justifyContent: "flex-end",
     },
 
-    formContainer: {
+    formLayout: {
       paddingTop: 92,
-      backgroundColor: "white",
+      backgroundColor: theme.colors.white,
       borderTopLeftRadius: 25,
       borderTopRightRadius: 25,
+      paddingBottom: 45,
     },
 
     title: {
@@ -149,6 +156,7 @@ const styles = (theme) =>
       ...theme.primaryText,
       alignSelf: "center",
       marginTop: 16,
+      // marginBottom: 45,
     },
     hasAccountTextLink: {
       color: theme.colors.lightBlue,
