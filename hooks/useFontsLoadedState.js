@@ -20,7 +20,7 @@ const useFontsLoadedState = () => {
   //     try {
   //       await Font.loadAsync({
   //         "Roboto-Regular": require("../assets/fonts/Roboto-Regular.ttf"),
-  //         "Roboto-Medium": require("../assets/fonts/Roboto-Medium.ttf"),
+  //         // "Roboto-Medium": require("../assets/fonts/Roboto-Medium.ttf"),
   //       });
 
   //       setFontsLoaded(true);

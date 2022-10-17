@@ -53,7 +53,7 @@ export default function LoginScreen({ navigation: { navigate } }) {
                     <View style={style.formFieldContainer}>
                       <InputText
                         value={formData.email}
-                        placeholder="Email"
+                        placeholder="Електронна адреса"
                         onChangeText={(text) =>
                           handleInputText(text, FORM_FIELDS_NAMES.email)
                         }
@@ -63,7 +63,7 @@ export default function LoginScreen({ navigation: { navigate } }) {
                     <View>
                       <InputText
                         value={formData.password}
-                        placeholder="Password"
+                        placeholder="Пароль"
                         onChangeText={(text) =>
                           handleInputText(text, FORM_FIELDS_NAMES.password)
                         }
@@ -117,6 +117,7 @@ const styles = (theme) =>
       alignSelf: "center",
       marginBottom: 32,
       fontSize: 30,
+      // fontFamily: "Roboto-Medium",
       fontWeight: "500",
     },
     form: {

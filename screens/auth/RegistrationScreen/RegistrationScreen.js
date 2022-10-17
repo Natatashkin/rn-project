@@ -47,8 +47,6 @@ export default function RegistrationScreen({ navigation: { navigate } }) {
     console.log("submit");
   };
 
-  // useEffect(() => {}, [isKeyboardOpen]);
-
   return (
     <ImageBackground>
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -65,7 +63,7 @@ export default function RegistrationScreen({ navigation: { navigate } }) {
                     <View style={style.formFieldContainer}>
                       <InputText
                         value={formData.name}
-                        placeholder="Name"
+                        placeholder="Ім'я"
                         onChangeText={(text) =>
                           handleInputText(text, FORM_FIELDS_NAMES.name)
                         }
@@ -75,7 +73,7 @@ export default function RegistrationScreen({ navigation: { navigate } }) {
                     <View style={style.formFieldContainer}>
                       <InputText
                         value={formData.email}
-                        placeholder="Email"
+                        placeholder="Електронна адреса"
                         onChangeText={(text) =>
                           handleInputText(text, FORM_FIELDS_NAMES.email)
                         }
@@ -85,7 +83,7 @@ export default function RegistrationScreen({ navigation: { navigate } }) {
                     <View>
                       <InputText
                         value={formData.password}
-                        placeholder="Password"
+                        placeholder="Пароль"
                         onChangeText={(text) =>
                           handleInputText(text, FORM_FIELDS_NAMES.password)
                         }
@@ -93,7 +91,7 @@ export default function RegistrationScreen({ navigation: { navigate } }) {
                       />
                     </View>
                     <View style={style.buttonContainer}>
-                      <Button onPress={handleSubmit} title="Sign Up!" />
+                      <Button onPress={handleSubmit} title="Зареєструватися" />
                     </View>
                   </ScrollView>
 
@@ -138,6 +136,7 @@ const styles = (theme) =>
     title: {
       alignSelf: "center",
       marginBottom: 32,
+      // fontFamily: "Roboto-Medium",
       fontSize: 30,
       fontWeight: "500",
     },
