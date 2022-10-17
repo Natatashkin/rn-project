@@ -71,7 +71,7 @@ export default function LoginScreen({ navigation: { navigate } }) {
                       />
                     </View>
                     <View style={style.buttonContainer}>
-                      <Button onPress={handleSubmit} title="Sign Up!" />
+                      <Button onPress={handleSubmit} title="Увійти" />
                     </View>
                   </ScrollView>
 
