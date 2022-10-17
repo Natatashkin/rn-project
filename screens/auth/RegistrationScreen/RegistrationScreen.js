@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import {
   SafeAreaView,
   View,
@@ -6,7 +6,6 @@ import {
   StyleSheet,
   KeyboardAvoidingView,
   Keyboard,
-  Dimensions,
   TouchableWithoutFeedback,
   Platform,
   ScrollView,
@@ -126,7 +125,6 @@ const styles = (theme) =>
     },
     screenLayout: {
       flex: 1,
-      // justifyContent: "flex-end",
     },
 
     formLayout: {

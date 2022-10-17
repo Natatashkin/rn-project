@@ -33,11 +33,11 @@ export default function Navigator() {
           <MainStack.Screen name="Home" component={HomeTabs} />
         ) : (
           <>
+            <MainStack.Screen name="Login" component={LoginScreen} />
             <MainStack.Screen
               name="Registration"
               component={RegistrationScreen}
             />
-            <MainStack.Screen name="Login" component={LoginScreen} />
           </>
         )}
       </MainStack.Navigator>

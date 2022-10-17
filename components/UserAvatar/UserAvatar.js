@@ -6,18 +6,22 @@ import { IconButton } from "../IconButton";
 export default function UserAvatar() {
   const { theme } = useTheme();
   const style = styles(theme);
+  const handleAvatarAdd = () => {
+    console.log("add avatar");
+  };
   return (
     <View style={style.avatar}>
       <View style={style.avatarImage}>
-        <Feather name="user" size={150} color={style.userIcon.color} />
+        <Feather name="user" size={150} color={theme.colors.grey} />
       </View>
-      <View style={{ position: "absolute", right: -12, bottom: 14 }}>
-        <IconButton
-          iconComponent={Feather}
-          iconSize={24}
-          iconColor={style.addIcon.color}
-          iconName="plus-circle"
-        />
+      <View style={style.addButtonContainer}>
+        <IconButton onPress={handleAvatarAdd}>
+          <Feather
+            name="plus-circle"
+            size={24}
+            color={theme.colors.lightBlue}
+          />
+        </IconButton>
       </View>
     </View>
   );
@@ -39,10 +43,11 @@ const styles = (theme) =>
       flex: 1,
       justifyContent: "center",
     },
-    userIcon: {
-      color: theme.colors.grey,
-    },
-    addIcon: {
-      color: theme.colors.lightBlue,
+    addButtonContainer: {
+      position: "absolute",
+      right: -20,
+      bottom: 10,
+      width: 40,
+      height: 40,
     },
   });
