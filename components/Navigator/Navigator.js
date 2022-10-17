@@ -1,11 +1,11 @@
+import React, { useContext, useEffect, useMemo } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import React, { useContext, useEffect, useMemo } from "react";
 import { UserContext } from "../../context";
 import { useFontsLoadedState } from "../../hooks";
 import RegistrationScreen from "../../screens/auth/RegistrationScreen/RegistrationScreen";
 import LoginScreen from "../../screens/auth/LoginScreen/LoginScreen";
-import HomeTabs from "../HomeTabs/HomeTabs";
+import HomeTabs from "../../screens/home/HomeTabs/HomeTabs";
 
 const MainStack = createStackNavigator();
 

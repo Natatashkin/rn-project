@@ -1,9 +1,12 @@
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { ThemeContext, UserContext } from "../../context";
-import { PostsScreen, CreatePostsScreen, ProfileScreen } from "../../screens";
 import { MaterialIcons } from "@expo/vector-icons";
-import { IconButton } from "../IconButton";
+import { UserContext, useTheme } from "../../../context";
+// import { PostsScreen, CreatePostsScreen, ProfileScreen } from "../../screens";
+import PostsScreen from "../PostsScreen/PostsScreen";
+import CreatePostsScreen from "../CreatePostsScreen/CreatePostsScreen";
+import ProfileScreen from "../ProfileScreen/ProfileScreen";
+import { IconButton } from "../../../components";
 
 const Tab = createBottomTabNavigator();
 
@@ -28,11 +31,7 @@ const HOME_TABS_OPTIONS = {
 
 export default function HomeTabs() {
   const { logoutUser } = useContext(UserContext);
-  const {
-    theme: {
-      colors: { grey },
-    },
-  } = useContext(ThemeContext);
+  const { theme } = useTheme();
 
   const handleLogout = async () => {
     console.log("logout");
@@ -47,13 +46,9 @@ export default function HomeTabs() {
         options={{
           headerTitle: "Пости",
           headerRight: () => (
-            <IconButton
-              onPress={handleLogout}
-              iconComponent={MaterialIcons}
-              iconSize={24}
-              iconColor={grey}
-              iconName={"logout"}
-            />
+            <IconButton onPress={handleLogout}>
+              <MaterialIcons name="logout" size={24} color={theme.color.grey} />
+            </IconButton>
           ),
         }}
       />
