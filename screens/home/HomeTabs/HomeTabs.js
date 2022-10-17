@@ -3,31 +3,13 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialIcons } from "@expo/vector-icons";
 import { UserContext, useTheme } from "../../../context";
 // import { PostsScreen, CreatePostsScreen, ProfileScreen } from "../../screens";
+import { HOME_TABS_OPTIONS } from "../../constants";
 import PostsScreen from "../PostsScreen/PostsScreen";
 import CreatePostsScreen from "../CreatePostsScreen/CreatePostsScreen";
 import ProfileScreen from "../ProfileScreen/ProfileScreen";
 import { IconButton } from "../../../components";
 
 const Tab = createBottomTabNavigator();
-
-const HOME_TABS_OPTIONS = {
-  headerTitleAlign: "center",
-  headerRightContainerStyle: {
-    backgroundColor: "red",
-    right: 10,
-  },
-  headerTitleContainerStyle: {
-    backgroundColor: "green",
-  },
-  headerLeftContainerStyle: {
-    backgroundColor: "blue",
-    left: 10,
-  },
-  headerTitleStyle: {
-    marginHorizontal: 10,
-  },
-  tabBarShowLabel: false,
-};
 
 export default function HomeTabs() {
   const { logoutUser } = useContext(UserContext);

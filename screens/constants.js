@@ -14,3 +14,22 @@ export const DEFAULT_LOGIN_FORM_VALUES = {
   [FORM_FIELDS_NAMES.email]: "",
   [FORM_FIELDS_NAMES.password]: "",
 };
+
+export const HOME_TABS_OPTIONS = {
+  headerTitleAlign: "center",
+  headerRightContainerStyle: {
+    backgroundColor: "red",
+    right: 10,
+  },
+  headerTitleContainerStyle: {
+    backgroundColor: "green",
+  },
+  headerLeftContainerStyle: {
+    backgroundColor: "blue",
+    left: 10,
+  },
+  headerTitleStyle: {
+    marginHorizontal: 10,
+  },
+  tabBarShowLabel: false,
+};

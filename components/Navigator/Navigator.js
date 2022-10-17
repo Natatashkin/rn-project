@@ -24,8 +24,6 @@ export default function Navigator() {
     }
   }, [isReady, fontsLoaded]);
 
-  // console.log("fontsLoaded", fontsLoaded);
-
   return (
     <NavigationContainer>
       <MainStack.Navigator screenOptions={{ headerShown: false }}>
