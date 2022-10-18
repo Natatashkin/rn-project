@@ -42,7 +42,7 @@ export default function InputText({
         ref={currentInputRef}
         placeholder={placeholder}
         placeholderTextColor={theme.colors.grey}
-        style={[style.input, { paddingRight: secureTextEntry && 0 }]}
+        style={[style.input, secureTextEntry && { paddingRight: 0 }]}
         value={value}
         onChangeText={onChangeText}
         autoCapitalize={autoCapitalize}
