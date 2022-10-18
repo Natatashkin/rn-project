@@ -45,7 +45,6 @@ export default function RegistrationScreen({ navigation: { navigate } }) {
     });
   };
   const handleSubmit = async () => {
-    console.log("submit");
     await registerUser(formData);
   };
 

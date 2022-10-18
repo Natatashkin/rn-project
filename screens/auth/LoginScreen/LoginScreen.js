@@ -50,10 +50,14 @@ export default function LoginScreen({ navigation: { navigate } }) {
         ]);
         break;
       case AUTH_ERRORS.userError:
-        Alert.alert("Помилка входу", authError, [{ text: "Ok" }]);
+        Alert.alert("Помилка входу", authError, [
+          { text: "Ok", onPress: () => setAuthError(null) },
+        ]);
         break;
       default:
-        Alert.alert("Помилка входу", authError, [{ text: "Ok" }]);
+        Alert.alert("Помилка входу", authError, [
+          { text: "Ok", onPress: () => setAuthError(null) },
+        ]);
         return;
     }
   };
