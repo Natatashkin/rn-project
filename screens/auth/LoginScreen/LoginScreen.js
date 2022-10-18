@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import {
   View,
   ScrollView,
@@ -9,17 +9,23 @@ import {
   Keyboard,
   StyleSheet,
   Platform,
+  Alert,
 } from "react-native";
 import { DEFAULT_LOGIN_FORM_VALUES, FORM_FIELDS_NAMES } from "../../constants";
 import { ImageBackground, InputText, Button } from "../../../components";
 import { useKeyboardStatus } from "../../../hooks";
-import { useTheme } from "../../../context";
+import { useTheme, useUser } from "../../../context";
+import { AUTH_ERRORS } from "../../constants";
 
 export default function LoginScreen({ navigation: { navigate } }) {
   const { theme } = useTheme();
   const style = styles(theme);
   const { isKeyboardOpen } = useKeyboardStatus();
+
+  const { loginUser } = useUser();
   const [formData, setFormData] = useState(DEFAULT_LOGIN_FORM_VALUES);
+  const [authError, setAuthError] = useState(null);
+
   const isIOS = Platform.OS === "ios";
   const formPosition = useMemo(
     () => (isKeyboardOpen ? "flex-start" : "flex-end"),
@@ -34,9 +40,38 @@ export default function LoginScreen({ navigation: { navigate } }) {
       };
     });
   };
-  const handleSubmit = (e) => {
-    console.log("submit");
+
+  const handleLoginError = () => {
+    switch (authError) {
+      case AUTH_ERRORS.noUser:
+        Alert.alert("Помилка входу", authError, [
+          { text: "Реєструватися", onPress: () => navigate("Registration") },
+          { text: "Відмінити", onPress: () => {} },
+        ]);
+        break;
+      case AUTH_ERRORS.userError:
+        Alert.alert("Помилка входу", authError, [{ text: "Ok" }]);
+        break;
+      default:
+        Alert.alert("Помилка входу", authError, [{ text: "Ok" }]);
+        return;
+    }
   };
+
+  const handleSubmit = async () => {
+    try {
+      await loginUser(formData);
+    } catch (error) {
+      setAuthError(error?.message || AUTH_ERRORS.serverError);
+    }
+  };
+
+  useEffect(() => {
+    console.log("authError >>>", authError);
+    if (authError) {
+      handleLoginError();
+    }
+  }, [authError]);
 
   return (
     <ImageBackground>

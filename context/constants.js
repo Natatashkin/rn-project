@@ -1,8 +1,6 @@
+export const SECURE_STORAGE_KEY = "userData";
+
 const theme = {
-  fonts: {
-    primaryFont: "Roboto-Regular",
-    fontSize: 16,
-  },
   borderRadius: 8,
   borderWidth: 1,
   colors: {

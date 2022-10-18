@@ -15,7 +15,7 @@ import {
   DEFAULT_REGISTRATION_FORM_VALUES,
   FORM_FIELDS_NAMES,
 } from "../../constants";
-import { useTheme } from "../../../context";
+import { useTheme, useUser } from "../../../context";
 import { useKeyboardStatus } from "../../../hooks";
 import {
   ImageBackground,
@@ -28,6 +28,7 @@ export default function RegistrationScreen({ navigation: { navigate } }) {
   const { theme } = useTheme();
   const style = styles(theme);
   const { isKeyboardOpen } = useKeyboardStatus();
+  const { registerUser } = useUser();
   const [formData, setFormData] = useState(DEFAULT_REGISTRATION_FORM_VALUES);
   const isIOS = Platform.OS === "ios";
   const formPosition = useMemo(
@@ -43,8 +44,9 @@ export default function RegistrationScreen({ navigation: { navigate } }) {
       };
     });
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async () => {
     console.log("submit");
+    await registerUser(formData);
   };
 
   return (
@@ -136,7 +138,6 @@ const styles = (theme) =>
     title: {
       alignSelf: "center",
       marginBottom: 32,
-      // fontFamily: "Roboto-Medium",
       fontSize: 30,
       fontWeight: "500",
     },

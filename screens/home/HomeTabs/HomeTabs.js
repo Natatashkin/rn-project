@@ -1,18 +1,18 @@
-import React, { useContext } from "react";
+import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialIcons } from "@expo/vector-icons";
-import { UserContext, useTheme } from "../../../context";
-// import { PostsScreen, CreatePostsScreen, ProfileScreen } from "../../screens";
+import { useUser, useTheme } from "../../../context";
 import { HOME_TABS_OPTIONS } from "../../constants";
 import PostsScreen from "../PostsScreen/PostsScreen";
 import CreatePostsScreen from "../CreatePostsScreen/CreatePostsScreen";
 import ProfileScreen from "../ProfileScreen/ProfileScreen";
 import { IconButton } from "../../../components";
+import { View } from "react-native";
 
 const Tab = createBottomTabNavigator();
 
 export default function HomeTabs() {
-  const { logoutUser } = useContext(UserContext);
+  const { logoutUser } = useUser();
   const { theme } = useTheme();
 
   const handleLogout = async () => {
@@ -28,9 +28,15 @@ export default function HomeTabs() {
         options={{
           headerTitle: "Пости",
           headerRight: () => (
-            <IconButton onPress={handleLogout}>
-              <MaterialIcons name="logout" size={24} color={theme.color.grey} />
-            </IconButton>
+            <View>
+              <IconButton onPress={handleLogout}>
+                <MaterialIcons
+                  name="logout"
+                  size={24}
+                  color={theme.colors.grey}
+                />
+              </IconButton>
+            </View>
           ),
         }}
       />

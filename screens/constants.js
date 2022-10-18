@@ -33,3 +33,9 @@ export const HOME_TABS_OPTIONS = {
   },
   tabBarShowLabel: false,
 };
+
+export const AUTH_ERRORS = {
+  noUser: "Ви не зареєстровані",
+  userError: "Hеправильні електронна адреса або пароль",
+  serverError: "Помилка сервера. Спробуйте пізніше",
+};

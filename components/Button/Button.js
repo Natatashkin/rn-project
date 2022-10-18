@@ -21,8 +21,8 @@ const styles = (theme) =>
       borderRadius: 100,
     },
     title: {
+      ...theme.primaryText,
       color: theme.colors.white,
-      fontSize: 16,
       fontWeight: "500",
     },
   });
