@@ -46,7 +46,7 @@ export default function LoginScreen({ navigation: { navigate } }) {
       case AUTH_ERRORS.noUser:
         Alert.alert("Помилка входу", authError, [
           { text: "Реєструватися", onPress: () => navigate("Registration") },
-          { text: "Відмінити", onPress: () => {} },
+          { text: "Відмінити", onPress: () => setAuthError(null) },
         ]);
         break;
       case AUTH_ERRORS.userError:
