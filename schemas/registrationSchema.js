@@ -11,12 +11,12 @@ const registrationSchema = yup.object().shape({
     .string()
     .email("приклад: example@gmail.com")
     .required("Обов'язкове поле")
-    .max("Максимум 50 символів")
+    .max(50, "Максимум 50 символів")
     .trim(),
   password: yup
     .string()
     .required("Обов'язкове поле")
-    .min(3, "Мінімум 8 символів"),
+    .min(8, "Мінімум 8 символів"),
 });
 
 export default registrationSchema;

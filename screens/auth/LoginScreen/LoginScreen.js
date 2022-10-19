@@ -12,7 +12,12 @@ import {
   Alert,
 } from "react-native";
 import { DEFAULT_LOGIN_FORM_VALUES, FORM_FIELDS_NAMES } from "../../constants";
-import { ImageBackground, InputText, Button } from "../../../components";
+import {
+  ImageBackground,
+  LoginForm,
+  InputText,
+  Button,
+} from "../../../components";
 import { useKeyboardStatus } from "../../../hooks";
 import { useTheme, useUser } from "../../../context";
 import { AUTH_ERRORS } from "../../constants";
@@ -22,60 +27,11 @@ export default function LoginScreen({ navigation: { navigate } }) {
   const style = styles(theme);
   const { isKeyboardOpen } = useKeyboardStatus();
 
-  const { loginUser } = useUser();
-  const [formData, setFormData] = useState(DEFAULT_LOGIN_FORM_VALUES);
-  const [authError, setAuthError] = useState(null);
-
   const isIOS = Platform.OS === "ios";
   const formPosition = useMemo(
     () => (isKeyboardOpen ? "flex-start" : "flex-end"),
     [isKeyboardOpen]
   );
-
-  const handleInputText = (text, key) => {
-    setFormData((prev) => {
-      return {
-        ...prev,
-        [key]: text,
-      };
-    });
-  };
-
-  const handleLoginError = () => {
-    switch (authError) {
-      case AUTH_ERRORS.noUser:
-        Alert.alert("Помилка входу", authError, [
-          { text: "Реєструватися", onPress: () => navigate("Registration") },
-          { text: "Відмінити", onPress: () => setAuthError(null) },
-        ]);
-        break;
-      case AUTH_ERRORS.userError:
-        Alert.alert("Помилка входу", authError, [
-          { text: "Ok", onPress: () => setAuthError(null) },
-        ]);
-        break;
-      default:
-        Alert.alert("Помилка входу", authError, [
-          { text: "Ok", onPress: () => setAuthError(null) },
-        ]);
-        return;
-    }
-  };
-
-  const handleSubmit = async () => {
-    try {
-      await loginUser(formData);
-    } catch (error) {
-      setAuthError(error?.message || AUTH_ERRORS.serverError);
-    }
-  };
-
-  useEffect(() => {
-    console.log("authError >>>", authError);
-    if (authError) {
-      handleLoginError();
-    }
-  }, [authError]);
 
   return (
     <ImageBackground>
@@ -88,32 +44,8 @@ export default function LoginScreen({ navigation: { navigate } }) {
               >
                 <View style={style.formLayout}>
                   <Text style={style.title}>Вхід</Text>
-                  <ScrollView contentContainerStyle={style.form}>
-                    <View style={style.formFieldContainer}>
-                      <InputText
-                        value={formData.email}
-                        placeholder="Електронна адреса"
-                        onChangeText={(text) =>
-                          handleInputText(text, FORM_FIELDS_NAMES.email)
-                        }
-                        keyboardType="email-address"
-                      />
-                    </View>
-                    <View>
-                      <InputText
-                        value={formData.password}
-                        placeholder="Пароль"
-                        onChangeText={(text) =>
-                          handleInputText(text, FORM_FIELDS_NAMES.password)
-                        }
-                        secureTextEntry
-                      />
-                    </View>
-                    <View style={style.buttonContainer}>
-                      <Button onPress={handleSubmit} title="Увійти" />
-                    </View>
-                  </ScrollView>
-
+                  {/*  */}
+                  <LoginForm />
                   <Text style={style.hasAccountText}>
                     Ще не зареєстровані?{" "}
                     <Text
@@ -158,15 +90,7 @@ const styles = (theme) =>
       fontSize: 30,
       fontWeight: "500",
     },
-    form: {
-      marginHorizontal: 40,
-    },
-    formFieldContainer: {
-      marginBottom: 16,
-    },
-    buttonContainer: {
-      marginTop: 42,
-    },
+
     hasAccountText: {
       ...theme.primaryText,
       alignSelf: "center",

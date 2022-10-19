@@ -10,7 +10,7 @@ import {
   Platform,
   ScrollView,
 } from "react-native";
-
+import { Formik } from "formik";
 import {
   DEFAULT_REGISTRATION_FORM_VALUES,
   FORM_FIELDS_NAMES,
@@ -23,6 +23,7 @@ import {
   InputText,
   Button,
   UserAvatar,
+  RegistrationForm,
 } from "../../../components";
 
 export default function RegistrationScreen({ navigation: { navigate } }) {
@@ -30,24 +31,11 @@ export default function RegistrationScreen({ navigation: { navigate } }) {
   const style = styles(theme);
   const { isKeyboardOpen } = useKeyboardStatus();
   const { registerUser } = useUser();
-  const [formData, setFormData] = useState(DEFAULT_REGISTRATION_FORM_VALUES);
   const isIOS = Platform.OS === "ios";
   const formPosition = useMemo(
     () => (isKeyboardOpen ? "flex-start" : "flex-end"),
     [isKeyboardOpen]
   );
-
-  const handleInputText = (text, key) => {
-    setFormData((prev) => {
-      return {
-        ...prev,
-        [key]: text,
-      };
-    });
-  };
-  const handleSubmit = async () => {
-    await registerUser(formData);
-  };
 
   return (
     <ImageBackground>
@@ -61,42 +49,7 @@ export default function RegistrationScreen({ navigation: { navigate } }) {
                 <UserAvatar />
                 <View style={style.formLayout}>
                   <Text style={style.title}>Реєстрація</Text>
-                  <ScrollView contentContainerStyle={style.form}>
-                    <View style={style.formFieldContainer}>
-                      <InputText
-                        value={formData.name}
-                        placeholder="Ім'я"
-                        onChangeText={(text) =>
-                          handleInputText(text, FORM_FIELDS_NAMES.name)
-                        }
-                      />
-                    </View>
-
-                    <View style={style.formFieldContainer}>
-                      <InputText
-                        value={formData.email}
-                        placeholder="Електронна адреса"
-                        onChangeText={(text) =>
-                          handleInputText(text, FORM_FIELDS_NAMES.email)
-                        }
-                        keyboardType="email-address"
-                      />
-                    </View>
-                    <View>
-                      <InputText
-                        value={formData.password}
-                        placeholder="Пароль"
-                        onChangeText={(text) =>
-                          handleInputText(text, FORM_FIELDS_NAMES.password)
-                        }
-                        secureTextEntry
-                      />
-                    </View>
-                    <View style={style.buttonContainer}>
-                      <Button onPress={handleSubmit} title="Зареєструватися" />
-                    </View>
-                  </ScrollView>
-
+                  <RegistrationForm />
                   <Text style={style.hasAccountText}>
                     Вже маєте аккаунт?{" "}
                     <Text
