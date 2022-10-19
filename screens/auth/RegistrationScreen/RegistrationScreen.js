@@ -17,6 +17,7 @@ import {
 } from "../../constants";
 import { useTheme, useUser } from "../../../context";
 import { useKeyboardStatus } from "../../../hooks";
+import { registrationSchema } from "../../../schemas";
 import {
   ImageBackground,
   InputText,
