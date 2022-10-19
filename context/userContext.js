@@ -61,7 +61,7 @@ const UserProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    // refreshUser();
+    refreshUser();
   }, [isLoggedIn]);
 
   return (
