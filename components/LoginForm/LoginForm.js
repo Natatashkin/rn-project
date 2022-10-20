@@ -63,8 +63,6 @@ export default function LoginForm() {
       validateOnChange={showErrors}
     >
       {({ handleChange, handleSubmit, submitCount, values, errors }) => {
-        console.log(errors);
-
         useEffect(() => {
           if (submitCount > 0) {
             setShowErrors(true);

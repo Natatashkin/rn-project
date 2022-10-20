@@ -32,25 +32,30 @@ export default function RegistrationScreen({ navigation: { navigate } }) {
   const { isKeyboardOpen } = useKeyboardStatus();
   const { registerUser } = useUser();
   const isIOS = Platform.OS === "ios";
-  const formPosition = useMemo(
-    () => (isKeyboardOpen ? "flex-start" : "flex-end"),
-    [isKeyboardOpen]
-  );
+  const isAndroid = Platform.OS === "android";
 
+  const viewTopMargin = isIOS ? 48 : 24;
+  // const bottomPadding = isIOS ? 0 : 24;
+  // const bottomMargin = isIOS ? 16 : 0;
+  // { paddingBottom: bottomPadding }
+  console.log(isKeyboardOpen);
   return (
     <ImageBackground>
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-        <View style={[style.container, { marginTop: isIOS ? 100 : 24 }]}>
+        <View style={[style.container, { marginTop: viewTopMargin }]}>
           <KeyboardAvoidingView style={style.container} behavior="padding">
-            <SafeAreaView style={{ flex: 1 }}>
-              <View
-                style={[style.screenLayout, { justifyContent: formPosition }]}
-              >
+            <SafeAreaView style={{ flex: 1, justifyContent: "flex-end" }}>
+              <ScrollView contentContainerStyle={[style.screenLayout]}>
                 <UserAvatar />
-                <View style={style.formLayout}>
+                <View style={[style.formLayout]}>
                   <Text style={style.title}>Реєстрація</Text>
                   <RegistrationForm />
-                  <Text style={style.hasAccountText}>
+                  <Text
+                    style={[
+                      style.hasAccountText,
+                      // { marginBottom: isKeyboardOpen ? 16 : 0 },
+                    ]}
+                  >
                     Вже маєте аккаунт?{" "}
                     <Text
                       onPress={() => navigate("Login")}
@@ -60,7 +65,7 @@ export default function RegistrationScreen({ navigation: { navigate } }) {
                     </Text>{" "}
                   </Text>
                 </View>
-              </View>
+              </ScrollView>
             </SafeAreaView>
           </KeyboardAvoidingView>
         </View>
@@ -78,6 +83,7 @@ const styles = (theme) =>
     },
     screenLayout: {
       flex: 1,
+      justifyContent: "flex-end",
     },
 
     formLayout: {
@@ -85,7 +91,7 @@ const styles = (theme) =>
       backgroundColor: theme.colors.white,
       borderTopLeftRadius: 25,
       borderTopRightRadius: 25,
-      paddingBottom: 45,
+      // paddingBottom: 16,
     },
 
     title: {

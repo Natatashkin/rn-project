@@ -6,7 +6,7 @@ import {
   FORM_FIELDS_NAMES,
 } from "../../screens/constants";
 import { registrationSchema } from "../../schemas";
-import { useUser, useTheme } from "../../context";
+import { useUser } from "../../context";
 import { InputText } from "../InputText";
 import { Button } from "../Button";
 import { FormValidationError } from "../FormValidationError";
@@ -19,8 +19,6 @@ export default function RegistrationForm() {
     await registerUser(values);
     setShowErrors(false);
   };
-
-  // console.log(showErrors);
 
   return (
     <Formik
