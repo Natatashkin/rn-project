@@ -16,7 +16,7 @@ const styles = (theme) =>
   StyleSheet.create({
     button: {
       alignItems: "center",
-      padding: 16,
+      padding: 12,
       backgroundColor: theme.colors.lightBlue,
       borderRadius: 100,
     },

@@ -64,7 +64,7 @@ export default function RegistrationForm() {
               {errors?.email && <FormValidationError error={errors.email} />}
             </View>
 
-            <View>
+            <View style={styles.formFieldContainer}>
               <InputText
                 value={values.password}
                 placeholder="Пароль"
@@ -87,12 +87,13 @@ export default function RegistrationForm() {
 
 const styles = StyleSheet.create({
   form: {
-    marginHorizontal: 40,
+    marginHorizontal: 20,
   },
   formFieldContainer: {
-    marginBottom: 16,
+    height: 72,
+    justifyContent: "flex-start",
   },
   buttonContainer: {
-    marginTop: 42,
+    marginTop: 18,
   },
 });

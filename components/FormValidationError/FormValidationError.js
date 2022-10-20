@@ -7,9 +7,11 @@ export default function FormValidationError({ error }) {
   return <Text style={style.error}>{error}</Text>;
 }
 
-const styles = () =>
+const styles = (theme) =>
   StyleSheet.create({
     error: {
-      color: "red",
+      color: theme.colors.red,
+      lineHeight: 14,
+      fontSize: 13,
     },
   });

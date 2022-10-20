@@ -4,6 +4,7 @@ const theme = {
   borderRadius: 8,
   borderWidth: 1,
   colors: {
+    red: "#fa114f",
     blue: "#007aff",
     lightBlue: "#0a84ff",
     yellow: "#ffcc00",

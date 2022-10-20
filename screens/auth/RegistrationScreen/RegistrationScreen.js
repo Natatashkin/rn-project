@@ -94,20 +94,11 @@ const styles = (theme) =>
       fontSize: 30,
       fontWeight: "500",
     },
-    form: {
-      marginHorizontal: 40,
-    },
-    formFieldContainer: {
-      marginBottom: 16,
-    },
-    buttonContainer: {
-      marginTop: 42,
-    },
+
     hasAccountText: {
       ...theme.primaryText,
       alignSelf: "center",
       marginTop: 16,
-      // marginBottom: 45,
     },
     hasAccountTextLink: {
       color: theme.colors.lightBlue,

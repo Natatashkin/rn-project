@@ -77,9 +77,10 @@ const styles = (theme) =>
       borderRadius: theme.borderRadius,
     },
     input: {
-      flex: 1,
-      padding: 16,
+      flexGrow: 1,
+      padding: 14,
       fontSize: 16,
+      height: 50,
       color: theme.colors.black,
     },
 

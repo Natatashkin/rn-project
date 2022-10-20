@@ -82,7 +82,7 @@ export default function LoginForm() {
               />
               {errors.email && <FormValidationError error={errors.email} />}
             </View>
-            <View>
+            <View style={style.formFieldContainer}>
               <InputText
                 value={values.password}
                 placeholder="Пароль"
@@ -106,12 +106,12 @@ export default function LoginForm() {
 const styles = (theme) =>
   StyleSheet.create({
     form: {
-      marginHorizontal: 40,
+      marginHorizontal: 20,
     },
     formFieldContainer: {
-      marginBottom: 16,
+      height: 70,
     },
     buttonContainer: {
-      marginTop: 42,
+      marginTop: 18,
     },
   });
