@@ -11,7 +11,7 @@ import { InputText } from "../InputText";
 import { Button } from "../Button";
 import { FormValidationError } from "../FormValidationError";
 
-export default function RegistrationForm() {
+export default function RegistrationForm({ wasFocused }) {
   const { registerUser } = useUser();
   const [showErrors, setShowErrors] = useState(false);
 
