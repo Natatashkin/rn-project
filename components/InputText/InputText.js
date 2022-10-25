@@ -11,6 +11,7 @@ export default function InputText({
   value,
   secureTextEntry = false,
   keyboardType = "default",
+  wasFocused,
 }) {
   const { theme } = useTheme();
   const style = styles(theme);
@@ -20,11 +21,13 @@ export default function InputText({
 
   const handleFocus = () => {
     setFocus(true);
+    wasFocused(true);
   };
 
   const handleBlur = () => {
     setFocus(false);
     setShowPassword(false);
+    wasFocused(false);
   };
 
   const toggleShowPassword = () => setShowPassword(!showPassword);

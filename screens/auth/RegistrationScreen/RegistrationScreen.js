@@ -23,14 +23,20 @@ export default function RegistrationScreen({ navigation: { navigate } }) {
   const style = styles(theme);
   const { isKeyboardOpen } = useKeyboardStatus();
   const { registerUser } = useUser();
+  const [isFocusedInput, setIsFocusedInput] = useState(false);
   const isIOS = Platform.OS === "ios";
   const isAndroid = Platform.OS === "android";
 
   const viewTopMargin = isIOS ? 48 : 24;
-  const bottomPadding = isIOS ? 48 : 24;
+  const setBottomPadding =
+    isFocusedInput && isIOS
+      ? { paddingBottom: 48 }
+      : isKeyboardOpen && isAndroid
+      ? { paddingBottom: 24 }
+      : null;
 
   const wasFocused = (data) => {
-    console.log(data);
+    setIsFocusedInput(data);
   };
 
   return (
@@ -39,14 +45,9 @@ export default function RegistrationScreen({ navigation: { navigate } }) {
         <View style={[style.container, { marginTop: viewTopMargin }]}>
           <KeyboardAvoidingView style={style.container} behavior="padding">
             <SafeAreaView style={{ flex: 1, justifyContent: "flex-end" }}>
-              <ScrollView
-                contentContainerStyle={[
-                  style.screenLayout,
-                  isKeyboardOpen && { paddingBottom: bottomPadding },
-                ]}
-              >
+              <ScrollView contentContainerStyle={[style.screenLayout]}>
                 <UserAvatar />
-                <View style={[style.formLayout]}>
+                <View style={[style.formLayout, setBottomPadding]}>
                   <Text style={style.title}>Реєстрація</Text>
                   <RegistrationForm wasFocused={wasFocused} />
 

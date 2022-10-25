@@ -1,7 +1,6 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState } from "react";
 import {
   View,
-  ScrollView,
   SafeAreaView,
   Text,
   TouchableWithoutFeedback,
@@ -9,44 +8,44 @@ import {
   Keyboard,
   StyleSheet,
   Platform,
-  Alert,
 } from "react-native";
-import { DEFAULT_LOGIN_FORM_VALUES, FORM_FIELDS_NAMES } from "../../constants";
-import {
-  ImageBackground,
-  LoginForm,
-  InputText,
-  Button,
-} from "../../../components";
+import { ImageBackground, LoginForm } from "../../../components";
 import { useKeyboardStatus } from "../../../hooks";
-import { useTheme, useUser } from "../../../context";
-import { AUTH_ERRORS } from "../../constants";
+import { useTheme } from "../../../context";
 
 export default function LoginScreen({ navigation: { navigate } }) {
   const { theme } = useTheme();
   const style = styles(theme);
   const { isKeyboardOpen } = useKeyboardStatus();
+  const [isFocusedInput, setIsFocusedInput] = useState(false);
 
   const isIOS = Platform.OS === "ios";
-  const formPosition = useMemo(
-    () => (isKeyboardOpen ? "flex-start" : "flex-end"),
-    [isKeyboardOpen]
-  );
+  const isAndroid = Platform.OS === "android";
+
+  const viewTopMargin = isIOS ? 48 : 24;
+  const setBottomPadding =
+    isFocusedInput && isIOS
+      ? { paddingBottom: 48 }
+      : isKeyboardOpen && isAndroid
+      ? { paddingBottom: 24 }
+      : null;
+
+  const wasFocused = (data) => {
+    setIsFocusedInput(data);
+  };
 
   return (
     <ImageBackground>
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-        <View style={[style.container, { marginTop: isIOS ? 100 : 24 }]}>
+        <View style={[style.container, { marginTop: viewTopMargin }]}>
           <KeyboardAvoidingView style={style.container} behavior="padding">
             <SafeAreaView style={{ flex: 1 }}>
-              <View
-                style={[style.screenLayout, { justifyContent: formPosition }]}
-              >
-                <View style={style.formLayout}>
+              <View style={[style.screenLayout]}>
+                <View style={[style.formLayout, setBottomPadding]}>
                   <Text style={style.title}>Вхід</Text>
                   {/*  */}
-                  <LoginForm />
-                  <Text style={style.hasAccountText}>
+                  <LoginForm wasFocused={wasFocused} />
+                  <Text style={[style.hasAccountText, { marginBottom: 16 }]}>
                     Ще не зареєстровані?{" "}
                     <Text
                       onPress={() => navigate("Registration")}
@@ -74,6 +73,7 @@ const styles = (theme) =>
     },
     screenLayout: {
       flex: 1,
+      justifyContent: "flex-end",
     },
 
     formLayout: {

@@ -48,6 +48,7 @@ export default function RegistrationForm({ wasFocused }) {
                 value={values.name}
                 placeholder="Ім'я"
                 onChangeText={handleChange(FORM_FIELDS_NAMES.name)}
+                wasFocused={wasFocused}
               />
               {errors?.name && <FormValidationError error={errors.name} />}
             </View>
@@ -58,6 +59,7 @@ export default function RegistrationForm({ wasFocused }) {
                 placeholder="Електронна адреса"
                 onChangeText={handleChange(FORM_FIELDS_NAMES.email)}
                 keyboardType="email-address"
+                wasFocused={wasFocused}
               />
               {errors?.email && <FormValidationError error={errors.email} />}
             </View>
@@ -68,6 +70,7 @@ export default function RegistrationForm({ wasFocused }) {
                 placeholder="Пароль"
                 onChangeText={handleChange(FORM_FIELDS_NAMES.password)}
                 secureTextEntry
+                wasFocused={wasFocused}
               />
               {errors?.password && (
                 <FormValidationError error={errors.password} />

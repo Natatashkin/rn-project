@@ -10,7 +10,7 @@ import {
 } from "../../screens/constants";
 import { InputText, Button, FormValidationError } from "../../components";
 
-export default function LoginForm() {
+export default function LoginForm({ wasFocused }) {
   const { theme } = useTheme();
   const style = styles(theme);
 
@@ -77,6 +77,7 @@ export default function LoginForm() {
                 placeholder="Електронна адреса"
                 onChangeText={handleChange(FORM_FIELDS_NAMES.email)}
                 keyboardType="email-address"
+                wasFocused={wasFocused}
               />
               {errors.email && <FormValidationError error={errors.email} />}
             </View>
@@ -86,6 +87,7 @@ export default function LoginForm() {
                 placeholder="Пароль"
                 onChangeText={handleChange(FORM_FIELDS_NAMES.password)}
                 secureTextEntry
+                wasFocused={wasFocused}
               />
               {errors.password && (
                 <FormValidationError error={errors.password} />
