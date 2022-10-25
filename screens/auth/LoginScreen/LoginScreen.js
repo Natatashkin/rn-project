@@ -9,7 +9,8 @@ import {
   StyleSheet,
   Platform,
 } from "react-native";
-import { ImageBackground, LoginForm } from "../../../components";
+import { ImageBackground } from "../../../components";
+import LoginForm from "../../../components/LoginForm/LoginForm";
 import { useKeyboardStatus } from "../../../hooks";
 import { useTheme } from "../../../context";
 
